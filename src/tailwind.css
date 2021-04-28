@@ -1,0 +1,120 @@
+:root {
+  --color-primary: var(--color-violet);
+  --color-primary-light: var(--color-violet-light);
+  --color-primary-dark: var(--color-violet-dark);
+
+  /*  */
+  --color-violet: #8b5cf6;
+  --color-violet-light: #a78bfa;
+  --color-violet-dark: #6d28d9;
+
+  /*  */
+  --color-light-bg: #ffffff;
+
+  /*  */
+  --color-light-text-contrast-high: #1a1a1a;
+  --color-light-text-contrast-medium: #808080;
+  --color-light-text-contrast-low: #cccccc;
+  --color-light-text-highlight: #0366d6;
+
+  /*  */
+  --color-dark-bg: #18161d;
+  --color-dark-elevation-1: #1e1929;
+  --color-dark-elevation-2: #241d34;
+  --color-dark-elevation-3: #2a2140;
+  --color-dark-elevation-4: #30244b;
+  --color-dark-elevation-5: #362856;
+  --color-dark-elevation-6: #3c2c62;
+
+  /*  */
+  --color-dark-text-contrast-high: #e5e5e5;
+  --color-dark-text-contrast-medium: #999999;
+  --color-dark-text-contrast-low: #4d4d4d;
+  --color-dark-text-highlight: #2e7ef5;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply text-center transition-colors rounded-md focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white;
+  }
+
+  .btn-sm {
+    @apply px-2 py-1 text-sm font-normal;
+  }
+
+  .btn-md {
+    @apply px-4 py-2 text-base font-medium;
+  }
+
+  .btn-lg {
+    @apply px-4 py-2 text-lg font-medium;
+  }
+
+  .btn-icon-sm {
+    @apply p-1;
+  }
+
+  .btn-icon-md {
+    @apply p-2;
+  }
+
+  .btn-icon-lg {
+    @apply p-4;
+  }
+
+  .btn-primary {
+    @apply text-white bg-primary hover:bg-primary-dark focus:ring-primary;
+  }
+
+  .btn-success {
+    @apply text-white bg-green-500 hover:bg-green-700 focus:ring-green-500;
+  }
+
+  .btn-warning {
+    @apply text-white bg-yellow-500 hover:bg-yellow-700 focus:ring-yellow-500;
+  }
+
+  .btn-danger {
+    @apply text-white bg-red-500 hover:bg-red-700 focus:ring-red-500;
+  }
+
+  .btn-black {
+    @apply text-white bg-gray-900 hover:bg-gray-700 focus:ring-gray-900;
+  }
+
+  .btn-primary-outline {
+    @apply border text-primary border-primary hover:text-white hover:bg-primary focus:ring-primary;
+  }
+
+  .btn-success-outline {
+    @apply text-green-500 border border-green-500 hover:text-white hover:bg-green-500 focus:ring-green-500;
+  }
+
+  .btn-warning-outline {
+    @apply text-yellow-500 border border-yellow-500 hover:text-white hover:bg-yellow-500 focus:ring-yellow-500;
+  }
+
+  .btn-danger-outline {
+    @apply text-red-500 border border-red-500 hover:text-white hover:bg-red-500 focus:ring-red-500;
+  }
+
+  .btn-black-outline {
+    @apply text-gray-900 border border-gray-900 hover:text-white hover:bg-gray-900 focus:ring-gray-900;
+  }
+
+  .btn-link {
+    @apply text-light-text-highlight hover:underline focus:ring-light-text-highlight;
+  }
+
+  .icon-btn {
+    @apply p-2 transition rounded-md text-light-text-contrast-medium hover:text-light-text-contrast-high hover:bg-white hover:shadow-lg focus:outline-none focus:ring focus:ring-primary-light focus:ring-offset-gray-50 focus:ring-offset-2;
+  }
+
+  .btn-white {
+    @apply bg-white text-light-text-contrast-medium hover:shadow-lg hover:text-light-text-contrast-high focus:ring-primary;
+  }
+}
