@@ -2,7 +2,7 @@
 
 ### WIP dashboard, will be available soon.
 
-#### [see live snippet](https://kamona-wd.github.io/k-ui-dashboard-alpine/)
+#### [see live snippet](https://k-ui-dashboard-alpine.netlify.app/)
 
 #### OR
 
