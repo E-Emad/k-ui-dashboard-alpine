@@ -1109,7 +1109,7 @@
                       <canvas id="doughnutChart"></canvas>
                     </div>
                     <!-- Legends -->
-                    <ul class="grid grid-cols-3 gap-3 p-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-2">
+                    <ul class="grid grid-cols-2 gap-3 p-6">
                       <template x-for="(browser, i) in visitorsBrowsers">
                         <li class="flex items-center space-x-3">
                           <span class="inline-block px-4 py-1" :style="`background-color: ${browser.color}`"></span>
@@ -1164,6 +1164,10 @@
                         <li class="flex items-center justify-between">
                           <span class="text-lg font-medium">Other</span>
                           <span class="text-base font-medium">50</span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                          <span class="text-lg font-medium">Total</span>
+                          <span class="text-base font-medium">7,088</span>
                         </li>
                       </ul>
                     </div>
