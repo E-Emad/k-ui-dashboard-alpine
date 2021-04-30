@@ -776,11 +776,11 @@ video {
 .hidden {
   display: none;
 }
-.h-6 {
-  height: 1.5rem;
-}
 .h-screen {
   height: 100vh;
+}
+.h-6 {
+  height: 1.5rem;
 }
 .h-full {
   height: 100%;
@@ -907,11 +907,11 @@ video {
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.flex-row-reverse {
-  flex-direction: row-reverse;
-}
 .flex-col {
   flex-direction: column;
+}
+.flex-row-reverse {
+  flex-direction: row-reverse;
 }
 .items-center {
   align-items: center;
@@ -933,6 +933,11 @@ video {
 }
 .gap-3 {
   gap: 0.75rem;
+}
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -963,11 +968,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-.space-x-6 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -1080,6 +1080,10 @@ video {
 .font-sans {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1104,11 +1108,14 @@ video {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+.font-medium {
+  font-weight: 500;
+}
 .font-semibold {
   font-weight: 600;
 }
-.font-medium {
-  font-weight: 500;
+.text-light-text-highlight {
+  color: var(--color-light-text-highlight);
 }
 .text-gray-900 {
   --tw-text-opacity: 1;
@@ -1142,9 +1149,6 @@ video {
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgba(30, 41, 59, var(--tw-text-opacity));
-}
-.text-light-text-highlight {
-  color: var(--color-light-text-highlight);
 }
 .text-green-900 {
   --tw-text-opacity: 1;
