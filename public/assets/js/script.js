@@ -15,6 +15,7 @@ const setup = () => {
       this.isDark = !this.isDark
       setTheme(this.isDark)
     },
+    isRTL: false,
     isSidebarOpen: window.innerWidth <= 1280 ? false : true,
     sidebarLinks: sidebarCollapsableLinks(),
     currentCollapsableLink: sidebarCollapsableLinks().filter((link) => (link.isCurrent ? link : null))[0],

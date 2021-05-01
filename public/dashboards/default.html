@@ -22,6 +22,7 @@
       x-init="$refs.loading.classList.add('hidden');"
       @resize.window="watchScreen()"
       :class="{ dark: isDark }"
+      :dir="isRTL ? 'rtl' : 'ltr'"
     >
       <div
         class="flex min-h-screen font-sans antialiased bg-light-bg text-light-text-contrast-high dark:bg-dark-bg dark:text-dark-text-contrast-high"
@@ -96,12 +97,12 @@
         <!-- Sidebar -->
         <div
           class="fixed inset-y-0 z-10 flex flex-row-reverse flex-shrink-0 h-screen transition-transform transform"
-          :class="{ '-translate-x-full sm:-translate-x-64': !isSidebarOpen, 'translate-x-0 shadow-lg xl:shadow-none dark:shadow-dark-lg dark:xl:shadow-none': isSidebarOpen }"
+          :class="{ '-translate-x-full sm:-translate-x-64 rtl:translate-x-full sm:rtl:translate-x-64': !isSidebarOpen, 'translate-x-0 shadow-lg xl:shadow-none dark:shadow-dark-lg dark:xl:shadow-none': isSidebarOpen }"
         >
           <!-- Mini bar -->
           <nav
             aria-label="Panels buttons"
-            class="flex flex-col items-center justify-between flex-shrink-0 w-16 border-r bg-light-bg border-light-border dark:bg-dark-elevation-2 dark:border-dark-border"
+            class="flex flex-col items-center justify-between flex-shrink-0 w-16 border-r bg-light-bg border-light-border dark:bg-dark-elevation-2 dark:border-dark-border rtl:border-r-0 rtl:border-l"
           >
             <!-- Toggle sidebar button -->
             <div class="flex items-center justify-center flex-shrink-0 w-full h-full max-h-14">
@@ -110,7 +111,7 @@
                 <svg
                   aria-hidden="true"
                   class="w-6 h-6 transition-transform transform"
-                  :class="!isSidebarOpen ? '-rotate-180' : ''"
+                  :class="!isSidebarOpen ? '-rotate-180 rtl:rotate-0' : 'rtl:-rotate-180'"
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-6 h-6"
                   fill="none"
@@ -129,32 +130,6 @@
 
             <!-- Center buttons -->
             <div class="flex flex-col items-center space-y-2 rounded-md bg-gray-50 dark:bg-dark-bg">
-              <!-- Settings button -->
-              <button class="icon-btn">
-                <span class="sr-only">Open settings panel</span>
-                <svg
-                  aria-hidden="true"
-                  class="w-6 h-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </button>
-
               <!-- Dark mode button -->
               <button class="icon-btn" @click="toggleTheme()">
                 <span class="sr-only">Toggle dark mode</span>
@@ -183,9 +158,9 @@
                 </svg>
               </button>
 
-              <!-- Messages button -->
-              <button class="icon-btn">
-                <span class="sr-only">Open messages panel</span>
+              <!-- Direction button -->
+              <button class="icon-btn" @click="isRTL = !isRTL">
+                <span class="sr-only">Change direction</span>
                 <svg
                   aria-hidden="true"
                   class="w-6 h-6"
@@ -198,7 +173,33 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                  />
+                </svg>
+              </button>
+
+              <!-- Settings button -->
+              <button class="icon-btn">
+                <span class="sr-only">Open settings panel</span>
+                <svg
+                  aria-hidden="true"
+                  class="w-6 h-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
               </button>
@@ -265,7 +266,7 @@
           <!-- Sidebar links -->
           <nav
             aria-label="Main"
-            class="flex flex-col flex-shrink-0 w-64 h-full transition-transform transform border-r bg-light-bg border-light-border dark:bg-dark-elevation-2 dark:border-dark-border"
+            class="flex flex-col flex-shrink-0 w-64 h-full transition-transform transform border-r bg-light-bg border-light-border dark:bg-dark-elevation-2 dark:border-dark-border rtl:border-r-0 rtl:border-l"
           >
             <!-- Logo -->
             <div class="flex items-center justify-center flex-shrink-0 pt-4">
@@ -305,8 +306,8 @@
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="link.svgPath" />
                         </svg>
                       </span>
-                      <span class="ml-2" x-text="link.title"></span>
-                      <span class="ml-auto mr-4">
+                      <span class="ml-2 rtl:ml-0 rtl:mr-2" x-text="link.title"></span>
+                      <span class="ml-auto mr-4 rtl:ml-4 rtl:mr-auto">
                         <svg
                           aria-hidden="true"
                           class="w-4 h-4 transition-transform transform"
@@ -332,7 +333,7 @@
                             <a
                               :href="subLink.link"
                               x-text="subLink.title"
-                              class="ml-12 transition-colors hover:text-light-text-contrast-high dark:hover:text-dark-text-contrast-high"
+                              class="ml-12 transition-colors hover:text-light-text-contrast-high dark:hover:text-dark-text-contrast-high rtl:mr-12 rtl:ml-0"
                               :class="subLink.isActive ? 'text-light-text-contrast-high dark:text-dark-text-contrast-high' : 'text-light-text-contrast-low dark:text-dark-text-contrast-medium'"
                             >
                             </a>
@@ -346,7 +347,7 @@
               <div class="pt-4 space-y-2 border-t border-light-border dark:border-dark-border">
                 <a
                   href="#"
-                  class="flex items-center space-x-2 transition-colors rounded-md group text-light-text-contrast-high hover:bg-primary hover:text-white dark:text-dark-text-contrast-high"
+                  class="flex items-center transition-colors rounded-md group text-light-text-contrast-high hover:bg-primary hover:text-white dark:text-dark-text-contrast-high"
                 >
                   <span
                     aria-hidden="true"
@@ -368,11 +369,11 @@
                       />
                     </svg>
                   </span>
-                  <span>Documentation</span>
+                  <span class="ml-2 rtl:ml-0 rtl:mr-2">Documentation</span>
                 </a>
                 <a
                   href="#"
-                  class="flex items-center space-x-2 transition-colors rounded-md group text-light-text-contrast-high hover:bg-primary hover:text-white dark:text-dark-text-contrast-high"
+                  class="flex items-center transition-colors rounded-md group text-light-text-contrast-high hover:bg-primary hover:text-white dark:text-dark-text-contrast-high"
                 >
                   <span
                     aria-hidden="true"
@@ -400,7 +401,7 @@
                       />
                     </svg>
                   </span>
-                  <span>Figma Kits</span>
+                  <span class="ml-2 rtl:ml-0 rtl:mr-2">Figma Kits</span>
                 </a>
               </div>
             </div>
@@ -413,7 +414,10 @@
         </div>
 
         <!-- Page content -->
-        <div class="flex flex-col flex-1 pb-20 sm:pb-8 sm:pl-16" :class="{ 'xl:pl-80': isSidebarOpen }">
+        <div
+          class="flex flex-col flex-1 pb-20 sm:pb-8 sm:pl-16 sm:rtl:pl-0 sm:rtl:pr-16"
+          :class="{ 'xl:pl-80 xl:rtl:pl-0 xl:rtl:pr-80': isSidebarOpen }"
+        >
           <!-- Header -- Navbar -->
           <header
             class="sticky top-0 z-[5] flex items-center flex-shrink-0 h-full px-2 bg-light-bg border-b border-light-border sm:px-4 max-h-14 dark:bg-dark-elevation-2 dark:border-dark-border"
@@ -452,7 +456,7 @@
                 x-transition:leave-end="transform opacity-0 scale-95"
                 x-show="open"
                 @click.away="open = false"
-                class="fixed z-10 flex flex-col p-2 space-y-2 origin-top-left border rounded-md shadow-lg bg-light-bg border-light-border top-2 left-2 right-2 dark:bg-dark-elevation-5 dark:border-dark-border dark:shadow-dark-lg"
+                class="fixed z-10 flex flex-col p-2 space-y-2 origin-top-left border rounded-md shadow-lg rtl:origin-top-right bg-light-bg border-light-border top-2 left-2 right-2 dark:bg-dark-elevation-5 dark:border-dark-border dark:shadow-dark-lg"
                 role="menu"
                 aria-orientation="vertical"
                 aria-label="mobile nav links"
@@ -479,12 +483,12 @@
                     <a
                       href="#"
                       @click="$event.preventDefault(); open = !open"
-                      class="flex items-center space-x-1 text-sm font-medium text-gray-400 transition-colors hover:text-gray-700"
+                      class="flex items-center text-sm font-medium text-light-text-contrast-high dark:text-dark-text-contrast-high"
                     >
-                      <span>Author</span>
+                      <span class="mr-1 rtl:mr-0 rtl:ml-1">Author</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4 text-gray-500 transition-transform transform"
+                        class="w-4 h-4 transition-transform transform"
                         :class="open ? 'rotate-180' : ''"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -502,16 +506,12 @@
                       class="overflow-hidden transition-all max-h-0"
                       :style="open ? 'max-height:' + $refs.authorLinks.scrollHeight + 'px' : ''"
                     >
-                      <div class="mt-2 ml-4 space-y-2">
-                        <a
-                          href="https://twitter.com/ak_kamona"
-                          target="_blank"
-                          class="flex items-center space-x-3 text-sm"
-                        >
+                      <div class="mt-2 ml-4 space-y-2 rtl:ml-0 rtl:mr-4">
+                        <a href="https://twitter.com/ak_kamona" target="_blank" class="flex items-center text-sm">
                           <span>Twitter</span>
                           <svg
                             aria-hidden="true"
-                            class="w-4 h-4"
+                            class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -525,15 +525,11 @@
                             />
                           </svg>
                         </a>
-                        <a
-                          href="https://github.com/Kamona-WD"
-                          target="_blank"
-                          class="flex items-center space-x-3 text-sm"
-                        >
+                        <a href="https://github.com/Kamona-WD" target="_blank" class="flex items-center text-sm">
                           <span>Github</span>
                           <svg
                             aria-hidden="true"
-                            class="w-4 h-4"
+                            class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -556,12 +552,12 @@
                     <a
                       href="#"
                       @click="$event.preventDefault(); open = !open"
-                      class="flex items-center space-x-1 text-sm font-medium text-gray-400 transition-colors hover:text-gray-700"
+                      class="flex items-center text-sm font-medium text-light-text-contrast-high dark:text-dark-text-contrast-high"
                     >
-                      <span>Projects</span>
+                      <span class="mr-1 rtl:mr-0 rtl:ml-1">Projects</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4 text-gray-500 transition-transform transform"
+                        class="w-4 h-4 transition-transform transform"
                         :class="open ? 'rotate-180' : ''"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -579,16 +575,16 @@
                       class="overflow-hidden transition-all max-h-0"
                       :style="open ? 'max-height:' + $refs.projectsLinks.scrollHeight + 'px' : ''"
                     >
-                      <div class="mt-2 ml-4 space-y-2">
+                      <div class="mt-2 ml-4 space-y-2 rtl:ml-0 rtl:mr-4">
                         <a
                           href="https://github.com/Kamona-WD/kwd-dashboard"
                           target="_blank"
-                          class="flex items-center space-x-3 text-sm"
+                          class="flex items-center text-sm"
                         >
                           <span>K-WD Dashboard</span>
                           <svg
                             aria-hidden="true"
-                            class="w-4 h-4"
+                            class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -605,12 +601,12 @@
                         <a
                           href="https://github.com/Kamona-WD/starter-dashboard-layout"
                           target="_blank"
-                          class="flex items-center space-x-3 text-sm"
+                          class="flex items-center text-sm"
                         >
                           <span>Starter Dashboard Layout</span>
                           <svg
                             aria-hidden="true"
-                            class="w-4 h-4"
+                            class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -627,12 +623,12 @@
                         <a
                           href="https://github.com/Kamona-WD/starter-dashboard-layout-vue"
                           target="_blank"
-                          class="flex items-center space-x-3 text-sm"
+                          class="flex items-center text-sm"
                         >
                           <span>Starter Dashboard Layout (Vue)</span>
                           <svg
                             aria-hidden="true"
-                            class="w-4 h-4"
+                            class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -654,7 +650,7 @@
             </div>
 
             <!-- Desktop nav links -->
-            <nav aria-label="Secondary" class="items-center hidden ml-8 space-x-4 sm:flex">
+            <nav aria-label="Secondary" class="items-center hidden ml-8 sm:flex rtl:ml-0 rtl:mr-8">
               <!-- Autour links -->
               <div x-data="{ open: false }" class="relative">
                 <a
@@ -663,9 +659,9 @@
                   aria-haspopup="true"
                   :aria-expanded="open ? 'true' : 'false'"
                   @click="$event.preventDefault(); open = !open"
-                  class="flex items-center space-x-1 text-sm font-medium transition-colors text-light-text-contrast-medium hover:text-light-text-contrast-high dark:text-dark-text-contrast-medium dark:hover:text-dark-text-contrast-high"
+                  class="flex items-center text-sm font-medium transition-colors text-light-text-contrast-medium hover:text-light-text-contrast-high dark:text-dark-text-contrast-medium dark:hover:text-dark-text-contrast-high"
                 >
-                  <span>Author</span>
+                  <span class="mr-1 rtl:mr-0 rtl:ml-1">Author</span>
                   <svg
                     aria-hidden="true"
                     class="w-4 h-4 text-gray-500 transition-transform transform"
@@ -691,19 +687,19 @@
                   x-show="open"
                   x-cloak
                   @click.away="open = false"
-                  class="absolute left-0 w-56 mt-2 origin-top-left rounded-md shadow-lg bg-light-bg dark:bg-dark-elevation-5 dark:shadow-dark-lg"
+                  class="absolute left-0 w-56 mt-2 origin-top-left rounded-md shadow-lg rtl:right-0 rtl:origin-top-right bg-light-bg dark:bg-dark-elevation-5 dark:shadow-dark-lg"
                 >
                   <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="author-menu">
                     <a
                       href="https://twitter.com/ak_kamona"
                       target="_blank"
-                      class="flex items-center px-4 py-2 space-x-3 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
+                      class="flex items-center px-4 py-2 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
                       role="menuitem"
                     >
                       <span>Twitter</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4"
+                        class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -720,13 +716,13 @@
                     <a
                       href="https://github.com/Kamona-WD"
                       target="_blank"
-                      class="flex items-center px-4 py-2 space-x-3 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
+                      class="flex items-center px-4 py-2 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
                       role="menuitem"
                     >
                       <span>Github</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4"
+                        class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -744,16 +740,16 @@
                 </div>
               </div>
               <!-- Projects links -->
-              <div x-data="{ open: false }" class="relative">
+              <div x-data="{ open: false }" class="relative ml-4 rtl:ml-0 rtl:mr-4">
                 <a
                   href="#"
                   id="projects-menu"
                   aria-haspopup="true"
                   :aria-expanded="open ? 'true' : 'false'"
                   @click="$event.preventDefault(); open = !open"
-                  class="flex items-center space-x-1 text-sm font-medium transition-colors text-light-text-contrast-medium hover:text-light-text-contrast-high dark:text-dark-text-contrast-medium dark:hover:text-dark-text-contrast-high"
+                  class="flex items-center text-sm font-medium transition-colors text-light-text-contrast-medium hover:text-light-text-contrast-high dark:text-dark-text-contrast-medium dark:hover:text-dark-text-contrast-high"
                 >
-                  <span>Projects</span>
+                  <span class="mr-1 rtl:mr-0 rtl:ml-1">Projects</span>
                   <svg
                     aria-hidden="true"
                     class="w-4 h-4 text-gray-500 transition-transform transform"
@@ -779,19 +775,19 @@
                   x-show="open"
                   x-cloak
                   @click.away="open = false"
-                  class="absolute left-0 w-full mt-2 origin-top-left rounded-md shadow-lg bg-light-bg min-w-max dark:bg-dark-elevation-5 dark:shadow-dark-lg"
+                  class="absolute left-0 w-full mt-2 origin-top-left rounded-md shadow-lg rtl:right-0 bg-light-bg min-w-max dark:bg-dark-elevation-5 dark:shadow-dark-lg"
                 >
                   <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="projects-menu">
                     <a
                       href="https://github.com/Kamona-WD/kwd-dashboard"
                       target="_blank"
-                      class="flex items-center px-4 py-2 space-x-3 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
+                      class="flex items-center px-4 py-2 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
                       role="menuitem"
                     >
                       <span>K-WD Dashboard</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4"
+                        class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -808,13 +804,13 @@
                     <a
                       href="https://github.com/Kamona-WD/starter-dashboard-layout"
                       target="_blank"
-                      class="flex items-center px-4 py-2 space-x-3 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
+                      class="flex items-center px-4 py-2 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
                       role="menuitem"
                     >
                       <span>Starter Dashboard Layout</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4"
+                        class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -831,13 +827,13 @@
                     <a
                       href="https://github.com/Kamona-WD/starter-dashboard-layout-vue"
                       target="_blank"
-                      class="flex items-center px-4 py-2 space-x-3 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
+                      class="flex items-center px-4 py-2 text-sm text-light-text-contrast-high hover:bg-gray-100 dark:text-dark-text-contrast-high dark:hover:bg-dark-elevation-1"
                       role="menuitem"
                     >
                       <span>Starter Dashboard Layout (VueJS)</span>
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4"
+                        class="w-4 h-4 ml-3 rtl:ml-0 rtl:mr-3"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -857,11 +853,11 @@
             </nav>
 
             <!-- Right buttons -->
-            <div class="flex items-center ml-auto space-x-4">
+            <div class="flex items-center ml-auto rtl:ml-0 rtl:mr-auto">
               <!-- Search button -->
               <button
                 @click="isSearchModalOpen = true; $nextTick(() => { $refs.searchInput.focus()})"
-                class="hidden sm:block icon-btn"
+                class="hidden mr-4 sm:block icon-btn rtl:mr-0 rtl:ml-4"
               >
                 <span class="sr-only">Open search modal</span>
                 <svg
@@ -946,12 +942,12 @@
             <!-- Main -->
             <main class="flex-1 px-4 pt-4" aria-labelledby="page-title">
               <nav aria-label="breadcrumb" class="mb-4">
-                <ol class="flex space-x-2">
-                  <li class="flex items-center text-sm">
+                <ol class="flex">
+                  <li class="flex items-center mr-2 text-sm rtl:mr-0 rtl:ml-2">
                     <a href="#" class="text-light-text-highlight dark:text-dark-text-highlight hover:underline">K-UI</a>
                     <svg
                       aria-hidden="true"
-                      class="w-4 h-4 ml-2"
+                      class="w-4 h-4 ml-2 rtl:ml-0 rtl:mr-2 rtl:transform rtl:rotate-180"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -963,13 +959,13 @@
                       />
                     </svg>
                   </li>
-                  <li class="flex items-center text-sm">
+                  <li class="flex items-center mr-2 text-sm rtl:mr-0 rtl:ml-2">
                     <a href="#" class="text-light-text-highlight dark:text-dark-text-highlight hover:underline">
                       Dashboards
                     </a>
                     <svg
                       aria-hidden="true"
-                      class="w-4 h-4 ml-2"
+                      class="w-4 h-4 ml-2 rtl:ml-0 rtl:mr-2 rtl:transform rtl:rotate-180"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -981,11 +977,8 @@
                       />
                     </svg>
                   </li>
-                  <li
-                    class="flex items-center text-sm text-light-text-contrast-high dark:text-dark-text-contrast-high"
-                    aria-current="page"
-                  >
-                    <span>Default</span>
+                  <li class="flex items-center mr-2 text-sm rtl:mr-0 rtl:ml-2" aria-current="page">
+                    <span class="text-light-text-contrast-high dark:text-dark-text-contrast-high"> Default </span>
                   </li>
                 </ol>
               </nav>
@@ -998,7 +991,9 @@
                   class="text-2xl font-semibold text-light-text-contrast-high dark:text-dark-text-contrast-high"
                 >
                   Default
-                  <span class="text-light-text-contrast-low dark:text-dark-text-contrast-low">(In Progress)</span>
+                  <span class="text-light-text-contrast-low dark:text-dark-text-contrast-low rtl:hidden">
+                    (In Progress)
+                  </span>
                 </h1>
                 <a
                   href="https://github.com/kamona-wd/k-ui-dashboard-alpine"
@@ -1016,9 +1011,9 @@
                     <h2 class="sr-only">Quick statistics</h2>
                     <template x-for="(card, i) in quickStatisticsCards()" x-key="i">
                       <div
-                        class="flex items-start p-6 space-x-6 border rounded-md bg-light-bg border-light-border dark:bg-dark-elevation-2 dark:border-dark-border"
+                        class="flex items-start p-6 border rounded-md bg-light-bg border-light-border dark:bg-dark-elevation-2 dark:border-dark-border"
                       >
-                        <div class="flex-shrink-0 p-4 bg-gray-100 rounded-md dark:bg-dark-bg">
+                        <div class="flex-shrink-0 p-4 mr-6 bg-gray-100 rounded-md rtl:mr-0 rtl:ml-6 dark:bg-dark-bg">
                           <svg
                             class="w-10 h-10 text-light-text-contrast-medium dark:text-dark-text-contrast-medium"
                             xmlns="http://www.w3.org/2000/svg"
@@ -1165,8 +1160,11 @@
                     <!-- Legends -->
                     <ul class="grid grid-cols-2 gap-3 p-6">
                       <template x-for="(browser, i) in visitorsBrowsers()">
-                        <li class="flex items-center space-x-3">
-                          <span class="inline-block px-4 py-1" :style="`background-color: ${browser.color}`"></span>
+                        <li class="flex items-center">
+                          <span
+                            class="inline-block px-4 py-1 mr-3 rtl:mr-0 rtl:ml-3"
+                            :style="`background-color: ${browser.color}`"
+                          ></span>
                           <span class="text-base font-medium" x-text="browser.browser">Chrome</span>
                         </li>
                       </template>
@@ -1295,7 +1293,7 @@
                   aria-labelledby="searchLabel"
                   name="search"
                   x-ref="searchInput"
-                  class="py-2 pl-10 pr-4 focus:outline-none bg-light-bg dark:bg-dark-elevation-6 dark:text-dark-text-contrast-high"
+                  class="py-2 pl-10 pr-4 rtl:pl-4 rtl:pr-10 focus:outline-none bg-light-bg dark:bg-dark-elevation-6 dark:text-dark-text-contrast-high"
                   placeholder="Search"
                 />
               </div>
