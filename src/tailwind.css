@@ -16,6 +16,7 @@
   --color-light-text-contrast-medium: #808080;
   --color-light-text-contrast-low: #cccccc;
   --color-light-text-highlight: #0366d6;
+  --color-light-border: #cbd5e0;
 
   /*  */
   --color-dark-bg: #18161d;
@@ -31,6 +32,7 @@
   --color-dark-text-contrast-medium: #999999;
   --color-dark-text-contrast-low: #4d4d4d;
   --color-dark-text-highlight: #2e7ef5;
+  --color-dark-border: #444c56;
 }
 
 @tailwind base;
@@ -39,7 +41,7 @@
 
 @layer components {
   .btn {
-    @apply text-center transition-colors rounded-md focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white;
+    @apply text-center transition-colors rounded-md focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-light-bg dark:focus:ring-offset-dark-elevation-2;
   }
 
   .btn-sm {
@@ -111,7 +113,7 @@
   }
 
   .icon-btn {
-    @apply p-2 transition rounded-md text-light-text-contrast-medium hover:text-light-text-contrast-high hover:bg-white hover:shadow-lg focus:outline-none focus:ring focus:ring-primary-light focus:ring-offset-gray-50 focus:ring-offset-2;
+    @apply p-2 overflow-hidden transition rounded-md text-light-text-contrast-medium hover:text-light-text-contrast-high hover:bg-white hover:shadow-lg focus:outline-none focus:ring focus:ring-primary-light focus:ring-offset-light-bg focus:ring-offset-2 dark:hover:bg-dark-elevation-4 dark:hover:text-dark-text-contrast-high dark:focus:ring-offset-dark-elevation-2 dark:hover:shadow-dark-lg;
   }
 
   .btn-white {

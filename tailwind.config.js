@@ -7,6 +7,11 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      boxShadow: {
+        'dark-sm': '0 8px 16px rgba(28,33,40,0.85)',
+        'dark-md': '0 16px 32px rgba(28,33,40,0.85)',
+        'dark-lg': '0 32px 64px rgba(28,33,40,0.85)',
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
@@ -22,6 +27,7 @@ module.exports = {
           'text-contrast-medium': 'var(--color-light-text-contrast-medium)',
           'text-contrast-low': 'var(--color-light-text-contrast-low)',
           'text-highlight': 'var(--color-light-text-highlight)',
+          border: 'var(--color-light-border)',
         },
         dark: {
           bg: 'var(--color-dark-bg)',
@@ -35,15 +41,12 @@ module.exports = {
           'text-contrast-medium': 'var(--color-dark-text-contrast-medium)',
           'text-contrast-low': 'var(--color-dark-text-contrast-low)',
           'text-highlight': 'var(--color-dark-text-highlight)',
+          border: 'var(--color-dark-border)',
         },
         gray: colors.blueGray,
       },
     },
   },
-  variants: {
-    extend: {
-      overflow: ['hover'],
-    },
-  },
+  variants: {},
   plugins: [],
 }
