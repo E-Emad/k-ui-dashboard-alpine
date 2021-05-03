@@ -991,6 +991,9 @@
                   class="text-2xl font-semibold text-light-text-contrast-high dark:text-dark-text-contrast-high"
                 >
                   E-Commerce
+                  <span class="text-light-text-contrast-low dark:text-dark-text-contrast-low rtl:hidden">
+                    (In Progress)
+                  </span>
                 </h1>
                 <a
                   href="https://github.com/kamona-wd/k-ui-dashboard-alpine"
@@ -1002,9 +1005,105 @@
               </div>
               <!-- Content -->
               <div class="mt-6">
-                <h2 class="text-2xl font-semibold text-light-text-contrast-high dark:text-dark-text-contrast-high">
-                  In Progress
-                </h2>
+                <!-- Quick stat charts -->
+                <div
+                  class="grid gap-4 overflow-hidden border rounded-md md:grid-cols-2 xl:grid-cols-4 border-light-border bg-light-bg dark:bg-dark-elevation-2 dark:border-dark-border"
+                >
+                  <!-- Storage -->
+                  <div class="flex items-center justify-between p-4 space-x-3">
+                    <div class="space-y-6">
+                      <h2
+                        class="text-lg font-medium text-light-text-contrast-medium dark:text-dark-text-contrast-medium"
+                      >
+                        Storage
+                      </h2>
+                      <h4 class="text-2xl font-medium text-light-text-contrast-high dark:text-dark-text-contrast-high">
+                        70%
+                      </h4>
+                    </div>
+                    <!-- Semi circle -->
+                    <div class="relative flex-shrink-0 w-40 h-20 overflow-hidden" x-data="{ percent: 70 }">
+                      <div
+                        aria-hidden="true"
+                        class="absolute w-full h-full border-[18px] border-b-0 rounded-t-full border-gray-200 dark:border-gray-700"
+                      ></div>
+                      <div class="absolute bottom-0 w-full text-lg font-semibold text-center">
+                        <div>250GB</div>
+                      </div>
+                      <div
+                        aria-hidden="true"
+                        class="absolute w-full h-full border-[18px] border-t-0 rounded-b-full top-full left-0 rotate border-primary"
+                        :style="`--rotate-deg: ${percent * 180 / 100}deg`"
+                      ></div>
+                      <style>
+                        .rotate {
+                          --rotate-deg: 0deg;
+                          transform-origin: 50% 0;
+                          animation-fill-mode: forwards;
+                          animation-duration: 0.5s;
+                          animation-timing-function: linear;
+                          animation-name: animate-rotate;
+                        }
+                        @keyframes animate-rotate {
+                          100% {
+                            transform: rotate(var(--rotate-deg));
+                          }
+                        }
+                      </style>
+                    </div>
+                  </div>
+
+                  <!-- Balance -->
+                  <div class="flex items-center justify-between p-4 space-x-3">
+                    <div class="space-y-6">
+                      <h2
+                        class="text-lg font-medium text-light-text-contrast-medium dark:text-dark-text-contrast-medium"
+                      >
+                        Balance
+                      </h2>
+                      <h4 class="text-2xl font-medium text-light-text-contrast-high dark:text-dark-text-contrast-high">
+                        $35,750
+                      </h4>
+                    </div>
+                    <div class="relative h-24 md:w-32 xl:w-40">
+                      <canvas id="balanceCanvas"></canvas>
+                    </div>
+                  </div>
+
+                  <!-- Orders -->
+                  <div class="flex items-center justify-between p-4 space-x-3">
+                    <div class="space-y-6">
+                      <h2
+                        class="text-lg font-medium text-light-text-contrast-medium dark:text-dark-text-contrast-medium"
+                      >
+                        Orders
+                      </h2>
+                      <h4 class="text-2xl font-medium text-light-text-contrast-high dark:text-dark-text-contrast-high">
+                        $8,527
+                      </h4>
+                    </div>
+                    <div class="relative h-24 md:w-32 xl:w-40">
+                      <canvas id="ordersCanvas"></canvas>
+                    </div>
+                  </div>
+
+                  <!-- Sessions -->
+                  <div class="flex items-center justify-between p-4 space-x-3">
+                    <div class="space-y-6">
+                      <h2
+                        class="text-lg font-medium text-light-text-contrast-medium dark:text-dark-text-contrast-medium"
+                      >
+                        Sessions
+                      </h2>
+                      <h4 class="text-2xl font-medium text-light-text-contrast-high dark:text-dark-text-contrast-high">
+                        40%
+                      </h4>
+                    </div>
+                    <div class="relative h-24 md:w-32 xl:w-40">
+                      <canvas id="sessionsCanvas"></canvas>
+                    </div>
+                  </div>
+                </div>
               </div>
             </main>
           </div>
@@ -1089,6 +1188,8 @@
       </section>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
+    <script src="../assets/js/ecommercepage.js"></script>
     <script src="../assets/js/sidebarlinks.js"></script>
     <script src="../assets/js/script.js"></script>
   </body>
